@@ -2,3 +2,7 @@
 	path = l10n-spain
 	url = https://github.com/oca/l10n-spain.git
 	branch = 13.0
+[submodule "community-data-files"]
+	path = community-data-files
+	url = https://github.com/oca/community-data-files.git
+	branch = 13.0
