@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record model="ir.rule" id="portal_group_public_rights">
+            <field name="name">Portal group public rights</field>
+            <field name="model_id" ref="website_sale.model_product_public_category"/>
+            <field name="domain_force">[('portal_only', '=', False)]</field>
+            <field name="groups" eval="[(4, ref('base.group_public'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_create" eval="False"/>
+        </record>
+    </data>
+</odoo>
