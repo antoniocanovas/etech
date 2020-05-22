@@ -3,11 +3,11 @@
     'name': "portal_users_customization",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Limit specific product categories to portal users
+        """,
 
     'description': """
-        Long description of module's purpose
+        Limit specific product categories to portal users
     """,
 
     'author': "My Company",
@@ -21,7 +21,8 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base',
-                'website_sale'],
+                'website_sale',
+                'website_event_sale'],
 
     # always loaded
     'data': [
