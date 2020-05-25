@@ -10,7 +10,7 @@ class ProductPublicCategory(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    portal_only = fields.Boolean(string="Portal only", compute="_compute_portal_only", stored=True)
+    portal_only = fields.Boolean(string="Portal only", compute="_compute_portal_only", store=True)
 
     def _compute_portal_only(self):
         portal_only=False
