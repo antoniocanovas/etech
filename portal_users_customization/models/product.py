@@ -12,8 +12,7 @@ class ProductTemplate(models.Model):
 
     portal_only = fields.Boolean(string="Portal only", compute="_compute_portal_only", store=True)
 
+    @api.depends('public_categ_ids.portal_only')
     def _compute_portal_only(self):
-        portal_only=False
-        if any(categ.portal_only for categ in self.public_categ_ids):
-            portal_only=True
-        self.portal_only = portal_only
+        for product in self:
+            product.portal_only = any(categ.portal_only for categ in self.public_categ_ids)
