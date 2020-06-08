@@ -6,3 +6,7 @@
 	path = community-data-files
 	url = https://github.com/oca/community-data-files.git
 	branch = 13.0
+[submodule "social"]
+	path = social
+	url = https://github.com/oca/social.git
+	branch = 13.0
