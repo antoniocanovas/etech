@@ -1,0 +1,11 @@
+*.py[cod]
+.project
+.ropeproject
+.pydevproject
+.settings
+*.zip
+__pycache__
+*.code-workspace
+community-data-files/
+l10n-spain/
+social/
