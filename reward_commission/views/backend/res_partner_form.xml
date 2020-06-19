@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.commission.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@name='address_name']" position="before">
+                <field name="partner_type"/>
+                <field name="distributor_id" attrs="{'invisible':  [('partner_type', '!=', 'hairdresser')]}"/>
+                <field name="certification_commission" attrs="{'invisible':  [('partner_type', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
