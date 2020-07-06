@@ -21,17 +21,20 @@ class ResPartner(models.Model):
 
     @api.depends('distributor_id')
     def _compute_certification_commission(self):
-        survey_user_input = request.env['survey.user_input']
-        date_range = (date.today() - relativedelta(years=1)).strftime(DEFAULT_SERVER_DATE_FORMAT)
-        certifications = survey_user_input.search([('partner_id','=',self.id),('quizz_passed','=',1),('date_completed','>', date_range )])
-        if len(certifications) > 0:
-            if self.partner_type == 'distributor':
-                self.certification_commission = DISTRIBUTOR_V * len(certifications)
+        if self.partner_type:
+            survey_user_input = request.env['survey.user_input']
+            date_range = (date.today() - relativedelta(years=1)).strftime(DEFAULT_SERVER_DATE_FORMAT)
+            certifications = survey_user_input.search([('partner_id','=',self.id),('quizz_passed','=',1),('date_completed','>', date_range )])
+            if len(certifications) > 0:
+                if self.partner_type == 'distributor':
+                    self.certification_commission = DISTRIBUTOR_V * len(certifications)
 
-            if self.partner_type == 'hairdresser':
-                self.certification_commission = HAIRDRESSE_V * len(certifications)
+                if self.partner_type == 'hairdresser':
+                    self.certification_commission = HAIRDRESSE_V * len(certifications)
+            else:
+                self.certification_commission = None
         else:
-            self.certification_commission = 0
+            self.certification_commission = None
 
 
     def _geo_localize_all_partners(self):

@@ -8,22 +8,18 @@ class SaleOrder(models.Model):
 
 
 
-
-
-
-
-
     def create_account_move(self,partner_id,commission):
         commission_prd = self.env.ref('reward_commission.product_commission_product_template')
+
         if partner_id and commission:
             self.env['account.move'].sudo().create({
                 'partner_id': partner_id.id,
-                'type':'out_invoice',
-                'invoice_user_id':'',
+                'type':'in_invoice',
                 'invoice_line_ids': [
                     (0, None, {
                         'product_id': commission_prd.id,
                         'quantity': 1,
+                        'account_id': self.env.ref('l10n_es.1_account_common_4100'),
                         'price_unit': self.amount_untaxed * (commission / 100),
                         'product_uom_id':1,
                         'tax_ids': [(6, 0, commission_prd.supplier_taxes_id.ids)]
@@ -33,7 +29,6 @@ class SaleOrder(models.Model):
 
 
     def _write(self, values):
-        print(values)
 
         res = super(SaleOrder, self)._write(values)
 
@@ -45,22 +40,6 @@ class SaleOrder(models.Model):
                 commission = 7 + distributor_id.certification_commission
                 self.create_account_move(distributor_id,commission)
 
-                # self.env['account.move'].sudo().create({
-                #     'partner_id': distributor_id.id,
-                #     'type':'out_invoice',
-                #     'invoice_user_id':'',
-                #     'invoice_line_ids': [
-                #         (0, None, {
-                #             'product_id': commission_prd.id,
-                #             'quantity': 1,
-                #             'price_unit': self.amount_untaxed * (commission / 100),
-                #             'product_uom_id':1,
-                #             'tax_ids': [(6, 0, commission_prd.supplier_taxes_id.ids)]
-                #             })
-                #     ],
-                # })
-
-
 
             if self.partner_id.partner_type != 'hairdresser' and  self.partner_id.partner_type != 'distributor':
 
@@ -70,20 +49,7 @@ class SaleOrder(models.Model):
                     commission = 3 + hairdresser_id.certification_commission
                     self.create_account_move(hairdresser_id,commission)
 
-                    # self.env['account.move'].sudo().create({
-                    #     'partner_id': hairdresser_id.id,
-                    #     'type':'out_invoice',
-                    #     'invoice_user_id':'',
-                    #     'invoice_line_ids': [
-                    #         (0, None, {
-                    #             'product_id': commission_prd.id,
-                    #             'quantity': 1,
-                    #             'price_unit': self.amount_untaxed * (commission / 100),
-                    #             'product_uom_id':1,
-                    #             'tax_ids': [(6, 0, commission_prd.supplier_taxes_id.ids)]
-                    #             })
-                    #     ],
-                    # })
+
 
                 if hairdresser_id.distributor_id:
                     distributor_id = hairdresser_id.distributor_id
@@ -91,20 +57,7 @@ class SaleOrder(models.Model):
                     commission = 2 + distributor_id.certification_commission
                     self.create_account_move(distributor_id,commission)
 
-                    # self.env['account.move'].sudo().create({
-                    #     'partner_id': distributor_id.id,
-                    #     'type':'out_invoice',
-                    #     'invoice_user_id':'',
-                    #     'invoice_line_ids': [
-                    #         (0, None, {
-                    #             'product_id': commission_prd.id,
-                    #             'quantity': 1,
-                    #             'price_unit': self.amount_untaxed * (commission / 100),
-                    #             'product_uom_id':1,
-                    #             'tax_ids': [(6, 0, commission_prd.supplier_taxes_id.ids)]
-                    #             })
-                    #     ],
-                    # })
+
 
 
 

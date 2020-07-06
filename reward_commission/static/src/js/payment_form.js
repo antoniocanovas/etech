@@ -115,6 +115,8 @@ odoo.define('reward_commission.payment_form', function(require) {
                     this.disableButton(button);
                     var $tx_url = this.$el.find('input[name="prepare_tx_url"]');
                     // if there's a prepare tx url set
+
+                
                     if ($tx_url.length === 1) {
                         // if the user wants to save his credit card info
                         var form_save_token = acquirer_form.find('input[name="o_payment_form_save_token"]').prop('checked');
