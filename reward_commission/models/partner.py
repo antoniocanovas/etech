@@ -37,5 +37,5 @@ class ResPartner(models.Model):
     def _geo_localize_all_partners(self):
         partners = self.search([])
         for partner in partners:
-            if partner.partner_latitude != 0 or partner.partner_longitude !=0:
+            if not partner.date_localization:
                 partner.geo_localize()
