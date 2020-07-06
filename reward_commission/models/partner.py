@@ -35,6 +35,6 @@ class ResPartner(models.Model):
 
 
     def _geo_localize_all_partners(self):
-        partners = self.search([()])
+        partners = self.search([])
         for partner in partners:
             partner.geo_localize()
