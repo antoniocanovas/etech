@@ -10,19 +10,22 @@ class WebsiteSalePayment(WebsiteSale):
     @http.route(['/shop/payment'], type='http', auth="public", website=True, sitemap=False)
     def payment(self, **post):
         res = super(WebsiteSalePayment, self).payment()
-
-        parner_id = request.env['res.users'].browse(request.env.uid).partner_id
+        order = request.website.sale_get_order()
+        parner_id = order.partner_id
+        parner_id.geo_localize()
         hairdressers =  self._get_haidressers(parner_id)
         res.qcontext.update({'hairdressers':hairdressers})
         return res
 
 
     def _get_haidressers(self,partner_id):
-        hairdressers_ids = request.env['res.partner'].search([('partner_type','=','hairdresser')])
+        hairdressers_ids = request.env['res.partner'].sudo().search([('partner_type','=','hairdresser')])
+
         current_partner = (partner_id.partner_latitude, partner_id.partner_longitude)
         hairdressers = []
         for hairdresser in hairdressers_ids:
             dist = distance.distance(current_partner, (hairdresser.partner_latitude,hairdresser.partner_longitude)).km
+            print(dist)
             if (dist < R):
                 hairdressers.append(hairdresser)
 

@@ -3,8 +3,8 @@
 
     <template id="payment_tokens_list" inherit_id="payment.payment_tokens_list">
         <xpath expr="//div[hasclass('card')]" position="before">
-            <!-- for haidresser, don't need choose a hairdresser -->
-            <t t-if="user_id.partner_type != 'hairdresser'">
+
+            <!-- for haidresser, ???don't need choose a hairdresser -->
                 <h5 class=" mt-3">hairdresser shop</h5>
                 <t t-if="hairdressers">
 
@@ -32,8 +32,6 @@
                     </p>
                     </div>
                 </t>
-            </t>
         </xpath>
-
     </template>
 </odoo>

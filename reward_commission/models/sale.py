@@ -19,7 +19,7 @@ class SaleOrder(models.Model):
                     (0, None, {
                         'product_id': commission_prd.id,
                         'quantity': 1,
-                        'account_id': self.env.ref('l10n_es.1_account_common_4100'),
+                        # 'account_id': self.env.ref('l10n_es.1_account_common_4100'),
                         'price_unit': self.amount_untaxed * (commission / 100),
                         'product_uom_id':1,
                         'tax_ids': [(6, 0, commission_prd.supplier_taxes_id.ids)]
