@@ -8,7 +8,6 @@
             <field name="sale_ok" eval="False"/>
             <field name="type">service</field>
             <field name="description_sale">Commission product</field>
-            
         </record>
     </data>
 </odoo>
