@@ -18,6 +18,21 @@ class ResPartner(models.Model):
 
     distributor_id = fields.Many2one('res.partner','Distributor')
     certification_commission = fields.Float(compute='_compute_certification_commission', string='certification commission %')
+    total_commission =  fields.Float(compute='_compute_total_certification', string='Total Commission')
+
+
+
+
+    def _compute_total_certification(self):
+        commission_product = self.env.ref('reward_commission.product_commission_product_template')
+        account_moves_ids = self.env['account.move'].search([('partner_id','=',self.id), ('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt')), ('invoice_payment_state', '!=', 'paid')])
+        total = 0
+        for account_move in account_moves_ids:
+            for invoices_line_id in account_move.invoice_line_ids:
+                if invoices_line_id.product_id == commission_product:
+                    total = total + invoices_line_id.price_total
+
+        self.total_commission = total
 
     @api.depends('distributor_id')
     def _compute_certification_commission(self):

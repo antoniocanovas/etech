@@ -8,17 +8,16 @@
                 <h5 class=" mt-3">hairdresser shop</h5>
                 <t t-if="hairdressers">
 
-
                     <div class="card etech-card-hairdressers mb-3">
                         <div class="card-body">
                             <select class="form" name="hairdresser" id="hairdresser" required="true">
                                 <option value="" disabled="true">Please Select a hairdresser near your address</option>
                                 <t t-foreach="hairdressers" t-as="hairdresser">
-                                    <option t-att-value="hairdresser.id"><t t-esc="hairdresser.name"/>
+                                    <option t-att-value="hairdresser['hairdresser'].id"><t t-esc="hairdresser['hairdresser'].name"/>
                                         //
-                                        <small><t t-esc="hairdresser.street"/>
-                                            <t t-esc="hairdresser.zip"/>
-                                            <t t-esc="hairdresser.city"/></small>
+                                        <small><t t-esc="hairdresser['hairdresser'].street"/>
+                                            <t t-esc="hairdresser['hairdresser'].zip"/>
+                                            <t t-esc="hairdresser['hairdresser'].city"/></small>
                                     </option>
                                 </t>
                             </select>

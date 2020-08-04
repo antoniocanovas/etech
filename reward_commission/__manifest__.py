@@ -14,6 +14,7 @@
         'l10n_es',
         'survey',
         'base_geolocalize',
+        'website',
 
     ],
     'data': [
@@ -28,7 +29,8 @@
 
     #frontend
     'views/frontend/assets.xml',
-    'views/frontend/payment.xml'
+    'views/frontend/payment.xml',
+    'views/frontend/portal.xml',
     ],
 
 

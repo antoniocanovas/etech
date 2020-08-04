@@ -6,8 +6,6 @@ class SaleOrder(models.Model):
 
     hair_dresser_id = fields.Many2one('res.partner','Hairdresser')
 
-
-
     def create_account_move(self,partner_id,commission):
         commission_prd = self.env.ref('reward_commission.product_commission_product_template')
 
