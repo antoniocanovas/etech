@@ -24,9 +24,12 @@ class WebsiteSalePayment(WebsiteSale):
         current_partner = (partner_id.partner_latitude, partner_id.partner_longitude)
         hairdressers = []
         for hairdresser in hairdressers_ids:
-            dist = distance.distance(current_partner, (hairdresser.partner_latitude,hairdresser.partner_longitude)).km
-            if (dist < R):
-                hairdressers.append({'hairdresser':hairdresser,'dist':dist})
+            try:
+                dist = distance.distance(current_partner, (hairdresser.partner_latitude,hairdresser.partner_longitude)).km
+                if (dist < R):
+                    hairdressers.append({'hairdresser':hairdresser,'dist':dist})
+            except ValueError:
+                pass
         if hairdressers:
             hairdressers = sorted(hairdressers, key=lambda k: k['dist'])
         return hairdressers
