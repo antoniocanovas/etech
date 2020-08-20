@@ -49,14 +49,10 @@ class SaleOrder(models.Model):
 
 
 
-                if hairdresser_id.distributor_id:
-                    distributor_id = hairdresser_id.distributor_id
-                    commission = 0
-                    commission = 2 + distributor_id.certification_commission
-                    self.create_account_move(distributor_id,commission)
-
-
-
-
+                    if hairdresser_id.distributor_id:
+                        distributor_id = hairdresser_id.distributor_id
+                        commission = 0
+                        commission = 2 + distributor_id.certification_commission
+                        self.create_account_move(distributor_id,commission)
 
         return res
