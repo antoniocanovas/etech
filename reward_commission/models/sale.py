@@ -30,29 +30,29 @@ class SaleOrder(models.Model):
 
         res = super(SaleOrder, self)._write(values)
 
-        if self.invoice_status == 'invoiced': #already sold . start to create reward_commission
+        for saleorder in self:
+            if saleorder.invoice_status == 'invoiced': #already sold . start to create reward_commission
 
-            if self.partner_id.partner_type == 'hairdresser': #hairdresser
-                distributor_id = self.partner_id.distributor_id
-                commission = 0
-                commission = 7 + distributor_id.certification_commission
-                self.create_account_move(distributor_id,commission)
-
-
-            if self.partner_id.partner_type != 'hairdresser' and  self.partner_id.partner_type != 'distributor':
-
-                if self.hair_dresser_id:
-                    hairdresser_id = self.hair_dresser_id
+                if saleorder.partner_id.partner_type == 'hairdresser': #hairdresser
+                    distributor_id = saleorder.partner_id.distributor_id
                     commission = 0
-                    commission = 3 + hairdresser_id.certification_commission
-                    self.create_account_move(hairdresser_id,commission)
+                    commission = 7 + distributor_id.certification_commission
+                    saleorder.create_account_move(distributor_id,commission)
 
 
+                if saleorder.partner_id.partner_type != 'hairdresser' and  saleorder.partner_id.partner_type != 'distributor':
 
-                    if hairdresser_id.distributor_id:
-                        distributor_id = hairdresser_id.distributor_id
+                    if saleorder.hair_dresser_id:
+                        hairdresser_id = saleorder.hair_dresser_id
                         commission = 0
-                        commission = 2 + distributor_id.certification_commission
-                        self.create_account_move(distributor_id,commission)
+                        commission = 3 + hairdresser_id.certification_commission
+                        saleorder.create_account_move(hairdresser_id,commission)
+
+
+                        if hairdresser_id.distributor_id:
+                            distributor_id = hairdresser_id.distributor_id
+                            commission = 0
+                            commission = 2 + distributor_id.certification_commission
+                            saleorder.create_account_move(distributor_id,commission)
 
         return res
