@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self)._write(values)
 
         for saleorder in self:
-            if saleorder.invoice_status == 'invoiced': #already sold . start to create reward_commission
+            if saleorder.invoice_status == 'invoiced' and 'invoice_status' in values: #already sold . start to create reward_commission
 
                 if saleorder.partner_id.partner_type == 'hairdresser': #hairdresser
                     distributor_id = saleorder.partner_id.distributor_id
