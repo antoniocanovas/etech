@@ -2,7 +2,7 @@
 
 {
     'name' : 'Reward Commission',
-    'version' : '1.3',
+    'version' : '1.5',
     'summary': 'Reward to resellers and hairdressers by commisions',
     'category': 'Tools',
     'depends' : [
