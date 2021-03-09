@@ -12,9 +12,9 @@ class WebsiteSalePayment(WebsiteSale):
     def payment(self, **post):
         res = super().payment()
         order = request.website.sale_get_order()
-        parner_id = order.partner_id
-        parner_id.geo_localize()
-        hairdressers = self._get_haidressers(parner_id)
+        partner_id = order.partner_shipping_id
+        partner_id.geo_localize()
+        hairdressers = self._get_haidressers(partner_id)
         res.qcontext.update({'hairdressers': hairdressers})
         return res
 

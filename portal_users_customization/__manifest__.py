@@ -4,7 +4,7 @@
 
     'summary': """
         Limit specific product categories to portal users
-        """,
+    """,
 
     'description': """
         Limit specific product categories to portal users
@@ -20,9 +20,9 @@
     'version': '0.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',
-                'website_sale',
-                'website_event_sale'],
+    'depends': [
+        'website_event_sale'
+    ],
 
     # always loaded
     'data': [
